@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import {HashRouter as Router , Route} from 'react-router-dom'
+import mainPage from './scenes/mainPage'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+
+ReactDOM.render((
+    <Router>
+      <div>
+        <Route path="/" component={mainPage}/>
+      </div>
+    </Router>
+  ), document.getElementById('root')
+);
