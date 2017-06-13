@@ -1,0 +1,4 @@
+//get repos
+export const GET_USER_REPO = 'GET_USER_REPO';
+export const GET_USER_REPO_SUCCESS = 'GET_USER_REPO_SUCCESS';
+export const GET_USER_REPO_FAILURE = 'GET_USER_REPO_FAILURE';
