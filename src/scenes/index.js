@@ -1,5 +1,6 @@
 import React from 'react'
 import UserNameForm from './components/userNameForm'
+import {withRouter} from 'react-router-dom'
 
 class mainPage extends React.Component{
   render() {
@@ -14,5 +15,5 @@ class mainPage extends React.Component{
   }
 }
 
-export default mainPage;
+export default withRouter(mainPage);
 

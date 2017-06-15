@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import TextFiledFormGroup from '../../../components/TextFiledFormGroup'
 import {connect} from 'react-redux'
 import {getUserRepo} from '../../../services/user/actions'
-import VideoItem from './VideoItem'
+import VideoItem from './RepoItem'
 import NoResults from '../../../components/Errors/NoResults'
-import {withRouter} from 'react-router-dom'
+
 
 
 class UserNameForm extends React.Component{
@@ -88,6 +88,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, {
+export default connect(mapStateToProps, {
   getUserRepo,
-})(UserNameForm));
+})(UserNameForm);

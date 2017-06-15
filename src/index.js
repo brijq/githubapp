@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware, compose} from "redux"
 import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter, routerMiddleware, push } from 'react-router-redux'
+import { routerMiddleware} from 'react-router-redux'
 import {Router} from 'react-router'
 import rootReducer from './store'
 import routes from './routes'
