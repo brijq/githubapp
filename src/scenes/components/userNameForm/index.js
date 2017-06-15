@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 import TextFiledFormGroup from '../../../components/TextFiledFormGroup'
 import {connect} from 'react-redux'
 import {getUserRepo} from '../../../services/user/actions'
+import VideoItem from './VideoItem'
+import NoResults from '../../../components/Errors/NoResults'
+import {withRouter} from 'react-router-dom'
 
-class userNameForm extends React.Component{
+
+class UserNameForm extends React.Component{
   constructor() {
     super();
     this.state = {
@@ -24,44 +28,57 @@ class userNameForm extends React.Component{
     e.preventDefault();
     // Validation to handle if any field is left empty
     if (this.state.git_user_name === '') {
-      this.context.router.push('/');
+      console.log(this.state.git_user_name);
     }
-    this.props.getUserRepo(this.state);
+    this.props.getUserRepo(this.state.git_user_name);
   }
 
   render() {
     return (
       <div className="well well-lg text-center">
-            <div >
+        <form onSubmit={this.handleSubmit}>
 
-              <TextFiledFormGroup
-                name="username"
-                value={this.state.git_user_name}
-                label="GitHub UserName"
-                type="text"
-                onChange={this.handleChange}
-                className="form-control"
-              />
+          <TextFiledFormGroup
+            onChange={this.handleChange}
+            value={this.state.git_user_name}
+            type="text"
+            name="git_user_name"
+            label="Git UserName"
+            placeholder="Please Enter GitHub Username"
+            className="form-control"
+          />
 
-              <div className="form-group row">
-                <div className="offset-md-5 ">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                  >
-                    Check Now!
-                  </button>
-                </div>
-              </div>
-
+          <div className="form-group row">
+            <div className="offset-md-5 ">
+              <button
+                type="submit"
+                className="btn btn-primary"
+              >
+                Check Now!
+              </button>
             </div>
           </div>
+        </form>
 
+        <div className="row">
+          {this.props.User.repos.length === 0 ? <NoResults text="No Results"/> : null }
+          {this.props.User.repos.map((repo) => {
+            return(
+              <div key={repo.id} className="col-md-4">
+                <VideoItem
+                  id={Number(repo.id)}
+                  title={repo.name}
+                />
+              </div>
+            )
+          })}
+        </div>
+      </div>
     );
   }
 }
 
-userNameForm.contextTypes = {
+UserNameForm.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
@@ -71,6 +88,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   getUserRepo,
-})(userNameForm);
+})(UserNameForm));

@@ -4,32 +4,35 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware, compose} from "redux"
 import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import { ConnectedRouter, routerMiddleware, push } from 'react-router-redux'
+import {Router} from 'react-router'
 import rootReducer from './store'
 import routes from './routes'
-
+import registerServiceWorker from './registerServiceWorker';
 
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 
-// Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history);
-
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk),
-    applyMiddleware(middleware),
+    applyMiddleware(
+      thunk,
+      routerMiddleware(history),
+    ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
-  ),
+  )
 );
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <Router history={history}>
       {routes}
-    </ConnectedRouter>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
+
+// Register service-worker
+registerServiceWorker();

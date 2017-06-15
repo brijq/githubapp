@@ -1,0 +1,9 @@
+exports[`test renders correctly 1`] = `
+<h2
+  className="text-center">
+  <span
+    className="fa fa-remove" />
+   
+  hello
+</h2>
+`;

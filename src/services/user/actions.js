@@ -4,7 +4,9 @@ import * as req from '../../data/user'
 export function getUserRepo(userName) {
   return dispatch => {
     dispatch({type: types.GET_USER_REPO});
+
     return req.GetUserRepo(userName).then((resp) => {
+      console.log(resp);
       dispatch({
         type: types.GET_USER_REPO_SUCCESS,
         payload: resp.data,
