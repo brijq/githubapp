@@ -1,14 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter as Router , Route} from 'react-router-dom'
-import mainPage from './scenes/mainPage'
+import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+import {createStore, applyMiddleware, compose} from "redux"
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware} from 'react-router-redux'
+import {Router} from 'react-router'
+import rootReducer from './store'
+import routes from './routes'
+import registerServiceWorker from './registerServiceWorker';
 
 
-ReactDOM.render((
-    <Router>
-      <div>
-        <Route path="/" component={mainPage}/>
-      </div>
-    </Router>
-  ), document.getElementById('root')
+// Create a history of your choosing (we're using a browser history in this case)
+const history = createHistory();
+
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(
+      thunk,
+      routerMiddleware(history),
+    ),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
 );
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      {routes}
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);
+
+// Register service-worker
+registerServiceWorker();
