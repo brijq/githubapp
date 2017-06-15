@@ -6,6 +6,6 @@ import repoList from './scenes/components/repolist'
 
 
 export default <mainPage>
-  <Route path="/" component={mainPage}/>
-  <Route path="/:username/:repo" component={repoList}/>
+  <Route exact path="/" component={mainPage}/>
+  <Route exact path="/:username/:repo" component={repoList}/>
 </mainPage>
