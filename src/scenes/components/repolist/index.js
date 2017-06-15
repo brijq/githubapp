@@ -37,12 +37,12 @@ class RepoList extends React.Component {
                       return (
                         <tr key={repo.id}>
                           <td>
-                            <a href={`#`} >
+                            <a href={`/`} >
                               {repo.login}
                             </a>
                           </td>
                           <td>
-                            <a href={`/home`} >
+                            <a href={`/`} >
                               {repo.contributions}
                             </a>
                           </td>
