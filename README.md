@@ -9,3 +9,5 @@ This web app is yet to be completed .
 
 Feel free to check out Github API link given below:
 https://developer.github.com/v3/
+
+Alternatively, visit https://github-project-5b98c.firebaseapp.com for a simple demo
